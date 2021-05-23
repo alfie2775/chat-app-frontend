@@ -1,25 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Main from "./components/Main";
+import Login from "./components/Login";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./redux";
+import "./App.css";
+import { isAuth } from "./utils/api";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <BrowserRouter>
+          <Switch>
+            <Route
+              exact
+              path="/login"
+              component={() => (isAuth() ? <Redirect to="/" /> : <Login />)}
+            />
+            <Route
+              exact
+              path="/"
+              component={() => (isAuth() ? <Main /> : <Redirect to="/login" />)}
+            />
+            <Redirect to="/" />
+          </Switch>
+        </BrowserRouter>
+      </PersistGate>
+    </Provider>
   );
 }
 
