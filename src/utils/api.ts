@@ -1,10 +1,6 @@
 import axios from "axios";
+import { getHeaders } from "./index";
 const api = "http://localhost:5000";
-
-const getHeaders = () => ({
-  "Content-Type": "application/json",
-  Authentication: "Bearer " + localStorage.getItem("kite-chat-token")!,
-});
 
 export const isAuth = (): boolean => {
   return localStorage.getItem("kite-chat-token") != null;
@@ -44,4 +40,50 @@ export const signUp = async (body: {
 
 export const logout = () => {
   localStorage.removeItem("kite-chat-token");
+};
+
+export const getAllChats = async () => {
+  return await axios
+    .get(api + "/users/all-chats", {
+      headers: getHeaders(),
+    })
+    .then((res) => res.data)
+    .catch((err) => ({ err }));
+};
+
+export const getFriends = async () => {
+  return await axios
+    .get(api + "/users/friends", {
+      headers: getHeaders(),
+    })
+    .then((res) => res.data)
+    .catch((err) => ({ err }));
+};
+
+export const getIncomingReq = async () => {
+  return await axios
+    .get(api + "/users/incoming-requests", {
+      headers: getHeaders(),
+    })
+    .then((res) => res.data)
+    .catch((err) => ({ err }));
+};
+
+export const getAllUserData = async () => {
+  let res;
+  res = await getAllChats();
+  if ("err" in res) return { err: res.err };
+  const chats = res;
+  res = await getFriends();
+  if ("err" in res) return { err: res.err };
+  const friends = res;
+  res = await getIncomingReq();
+  if ("err" in res) return { err: res.err };
+  const incomingReq = res;
+  console.log(chats, friends, incomingReq);
+  return {
+    chats,
+    friends,
+    incomingReq,
+  };
 };

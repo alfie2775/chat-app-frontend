@@ -1,4 +1,4 @@
-import { User, ReduxAction } from "../../utils/interfaces";
+import { User, ReduxAction } from "../../utils/types";
 
 export const user: (state: User | {}, action: ReduxAction) => User | {} = (
   state = {},
