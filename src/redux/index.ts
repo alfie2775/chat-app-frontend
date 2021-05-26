@@ -6,9 +6,15 @@ import storage from "redux-persist/lib/storage/session";
 const persistConfig = {
   key: "root",
   storage,
+  blacklist: ["socket"],
 };
 
-const persistedReducer = persistReducer<any, any>(persistConfig, reducer);
+const rootReducer = (state: any, action: any) => {
+  if (action.type === "RESET_STATE") return reducer(undefined, action);
+  return reducer(state, action);
+};
+
+const persistedReducer = persistReducer<any, any>(persistConfig, rootReducer);
 
 const store = createStore(
   persistedReducer,

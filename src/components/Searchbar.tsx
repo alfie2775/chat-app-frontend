@@ -1,22 +1,37 @@
-import { Dispatch, FC, SetStateAction, useState } from "react";
+import { Dispatch, FC, SetStateAction, useRef } from "react";
 import { Col, FormControl, Row } from "react-bootstrap";
+import { Chats } from "../utils/types";
 
 interface Props {
-  isChatsVisible: boolean;
-  setIsChatsVisible: Dispatch<SetStateAction<boolean>>;
+  chats: Chats;
+  setSearchedChats: Dispatch<SetStateAction<Chats>>;
 }
 
-const Searchbar: FC<Props> = () => {
-  const [value, setValue] = useState("");
+const Searchbar: FC<Props> = ({ chats, setSearchedChats }) => {
+  const ref = useRef<HTMLInputElement>(null);
 
   const handleSearch = (e: any): void => {
-    setValue(e.target.value);
+    if (ref.current) {
+      if (ref.current.value !== "") {
+        let search = ref.current.value;
+        let newChats: any = chats.filter((chat) =>
+          "to" in chat
+            ? chat.to.username
+                .toLocaleLowerCase()
+                .startsWith(search.toLocaleLowerCase())
+            : chat.name
+                .toLocaleLowerCase()
+                .startsWith(search.toLocaleLowerCase())
+        );
+        setSearchedChats(newChats);
+      } else setSearchedChats(chats);
+    }
   };
 
   return (
     <Row>
       <Col sm={12}>
-        <FormControl type="text" value={value} onChange={handleSearch} />
+        <FormControl type="text" ref={ref} onChange={handleSearch} />
       </Col>
     </Row>
   );

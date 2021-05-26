@@ -1,12 +1,15 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { setChats, setFriends, setIncomingReqs } from "../redux/actions";
-import { useDispatch } from "../redux/hooks";
+import { useDispatch, useSelector } from "../redux/hooks";
 import { getAllUserData } from "../utils/api";
 import Sidebar from "./Sidebar";
+import MainChat from "./MainChat";
 
 const Main = () => {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let didCancel = false;
@@ -18,21 +21,27 @@ const Main = () => {
       dispatch(setChats(chats));
       dispatch(setFriends(friends));
       dispatch(setIncomingReqs(incomingReq));
+      dispatch({ type: "SET_SOCKET", payload: user._id });
+      setLoading(false);
     }
     helper();
 
     return () => {
       didCancel = true;
     };
-  }, [dispatch]);
+  }, [dispatch, user._id]);
+
+  if (loading) return <></>;
 
   return (
-    <Container>
+    <Container fluid style={{ height: "100vh" }}>
       <Row>
-        <Col sm={12} md={4}>
+        <Col sm={12} md={5} style={{ height: "100vh" }}>
           <Sidebar />
         </Col>
-        <Col></Col>
+        <Col style={{ height: "100vh" }}>
+          <MainChat />
+        </Col>
       </Row>
     </Container>
   );

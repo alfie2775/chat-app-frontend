@@ -37,7 +37,6 @@ const Login = () => {
     if (res.err) {
     } else {
       dispatch({ type: "SET_USER", payload: res.user });
-      console.log(res.user);
       clearState();
       history.push("/");
     }

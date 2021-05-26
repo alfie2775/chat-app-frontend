@@ -10,8 +10,6 @@ export const user: (state: User | {}, action: ReduxAction) => User | {} = (
       delete newUser.admin;
       delete newUser.hash;
       delete newUser.salt;
-      delete newUser.createdAt;
-      delete newUser.updatedAt;
       delete newUser.lastSeen;
       return newUser;
     }

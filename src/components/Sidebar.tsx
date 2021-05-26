@@ -3,15 +3,17 @@ import UserInfo from "./UserInfo";
 import Searchbar from "./Searchbar";
 import { useState } from "react";
 import Chats from "./Chats";
-import SearchResults from "./SearchResults";
+import { useSelector } from "../redux/hooks";
+import { Chats as ChatsType } from "../utils/types";
 
 const Sidebar = () => {
-  const [isChatsVisible, setIsChatsVisible] = useState(true);
+  const chats: ChatsType = useSelector((state) => state.chats);
+  const [searchedChats, setSearchedChats] = useState(chats);
   return (
-    <Container>
+    <Container fluid>
       <UserInfo />
-      <Searchbar {...{ isChatsVisible, setIsChatsVisible }} />
-      {isChatsVisible ? <Chats chats={[]} /> : <SearchResults />}
+      <Searchbar chats={chats} setSearchedChats={setSearchedChats} />
+      <Chats chats={searchedChats} isEmpty={chats.length < 1} />
     </Container>
   );
 };

@@ -7,7 +7,7 @@ export const friends: (state: User[] | [], action: ReduxAction) => User[] | [] =
         return action.payload;
       case "ADD_FRIEND":
         return [...state, action.payload];
-      case "REMOVE_CHAT":
+      case "REMOVE_FRIEND":
         return state.filter((friend) => friend._id !== action.payload);
       default:
         return state;

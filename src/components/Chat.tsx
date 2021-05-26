@@ -1,15 +1,39 @@
 import React from "react";
-interface Props {
-  firstname: string;
-  lastname: string;
-  username: string;
-  messages: any[];
-}
-const Chat: React.FC<{ chat: Props }> = ({ chat }) => {
+import { Col, Row } from "react-bootstrap";
+import { Dispatch } from "../redux";
+import { setCurrentChat } from "../redux/actions";
+import { useDispatch } from "../redux/hooks";
+import { PersonalChat, GroupChat } from "../utils/types";
+
+const Chat: React.FC<{ chat: PersonalChat | GroupChat; idx: number }> = ({
+  chat,
+  idx,
+}) => {
+  const dispatch: Dispatch = useDispatch();
+  const handleClick = (e: any) => {
+    dispatch(setCurrentChat(chat as any));
+  };
+
   return (
-    <div>
-      <p>{chat.firstname}</p>
-    </div>
+    <Row>
+      <Col sm={3}>
+        <p>IMG</p>
+      </Col>
+      <Col onClick={handleClick}>
+        <div className="d-flex flex-column">
+          <p>
+            {"to" in chat
+              ? chat.to.firstname + " " + chat.to.lastname
+              : chat.name}
+          </p>
+          <p>
+            {chat.messages.length > 0
+              ? chat.messages[chat.messages.length - 1].text
+              : Date.now().toString()}
+          </p>
+        </div>
+      </Col>
+    </Row>
   );
 };
 

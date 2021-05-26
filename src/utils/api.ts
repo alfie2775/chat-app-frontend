@@ -1,9 +1,11 @@
 import axios from "axios";
 import { getHeaders } from "./index";
-const api = "http://localhost:5000";
+export const api = true
+  ? "http://localhost:5000"
+  : "https://kite-backend.herokuapp.com";
 
 export const isAuth = (): boolean => {
-  return localStorage.getItem("kite-chat-token") != null;
+  return sessionStorage.getItem("kite-chat-token") != null;
 };
 
 export const signIn = async (body: { username: string; password: string }) => {
@@ -15,7 +17,7 @@ export const signIn = async (body: { username: string; password: string }) => {
     .catch((err) => {
       return { err };
     });
-  localStorage.setItem("kite-chat-token", res.token);
+  sessionStorage.setItem("kite-chat-token", res.token);
   if (res.err) return { err: res.err };
   return { user: res.user };
 };
@@ -33,13 +35,13 @@ export const signUp = async (body: {
     .catch((err) => {
       return { err };
     });
-  localStorage.setItem("kite-chat-token", res.token);
+  sessionStorage.setItem("kite-chat-token", res.token);
   if (res.err) return { err: res.err };
   return { user: res.user };
 };
 
 export const logout = () => {
-  localStorage.removeItem("kite-chat-token");
+  sessionStorage.removeItem("kite-chat-token");
 };
 
 export const getAllChats = async () => {
@@ -80,10 +82,35 @@ export const getAllUserData = async () => {
   res = await getIncomingReq();
   if ("err" in res) return { err: res.err };
   const incomingReq = res;
-  console.log(chats, friends, incomingReq);
   return {
     chats,
     friends,
     incomingReq,
   };
+};
+
+export const createGroup = async (name: string) => {
+  return await axios
+    .post(
+      api + "/groups/create",
+      { name },
+      {
+        headers: getHeaders(),
+      }
+    )
+    .then((res) => res.data)
+    .catch((err) => ({ err }));
+};
+
+export const acceptRequest = async (addId: string) => {
+  const res = await axios
+    .post(
+      api + "/users/add-friend",
+      { addId },
+      {
+        headers: getHeaders(),
+      }
+    )
+    .then((res) => res.data);
+  return res;
 };

@@ -3,6 +3,8 @@ export interface User {
   lastname: string;
   username: string;
   _id: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface ReduxAction {
@@ -16,6 +18,8 @@ export interface PersonalMessage {
   from: string;
   text: string;
   tagged: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface PersonalChat {
@@ -31,13 +35,15 @@ export interface GroupMessage {
   user: User;
   text: string;
   tagged: string;
+  group: string;
+  createdAt: string;
   updatedAt: string;
 }
 
 export interface GroupChat {
   _id: string;
   name: string;
-  messages: GroupMessage;
+  messages: GroupMessage[];
   members: User[];
   createdAt: string;
   updatedAt: string;
