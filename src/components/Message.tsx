@@ -31,7 +31,9 @@ const Message: FC<{ msg: PersonalMessage | GroupMessage }> = ({ msg }) => {
       >
         {msg.text}
       </Linkify>
-      <p style={{ textAlign: "end" }}>{msg.createdAt}</p>
+      <p style={{ textAlign: "end" }}>
+        {new Date(msg.createdAt).toLocaleTimeString()}
+      </p>
     </div>
   );
 };

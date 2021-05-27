@@ -1,4 +1,10 @@
-import { GroupChat, PersonalChat, ReduxAction, User } from "../../utils/types";
+import {
+  Chats,
+  GroupChat,
+  PersonalChat,
+  ReduxAction,
+  User,
+} from "../../utils/types";
 
 export const setChats: (chats: any) => ReduxAction = (chats) => ({
   type: "SET_CHATS",
@@ -47,4 +53,29 @@ export const resetState = () => ({
 export const setCurrentChat = (idx: PersonalChat | GroupChat) => ({
   type: "SET_CURRENT_CHAT",
   payload: idx,
+});
+export const removeGroupMember = (
+  id: string,
+  groupId: string
+): ReduxAction => ({
+  type: "REMOVE_GROUP_MEMBER",
+  payload: { id, groupId },
+});
+
+export const removeGroupAdmin = (id: string, groupId: string): ReduxAction => ({
+  type: "REMOVE_GROUP_ADMIN",
+  payload: { id, groupId },
+});
+
+export const refreshCurrentChat = (chats: Chats): ReduxAction => ({
+  type: "REFRESH_CURRENT_CHAT",
+  payload: chats,
+});
+
+export const addGroupMember = (id: string, member: User): ReduxAction => ({
+  type: "ADD_GROUP_MEMBER",
+  payload: {
+    id,
+    member,
+  },
 });

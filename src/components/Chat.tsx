@@ -11,7 +11,7 @@ const Chat: React.FC<{ chat: PersonalChat | GroupChat; idx: number }> = ({
 }) => {
   const dispatch: Dispatch = useDispatch();
   const handleClick = (e: any) => {
-    dispatch(setCurrentChat(chat as any));
+    dispatch(setCurrentChat({ ...chat }));
   };
 
   return (

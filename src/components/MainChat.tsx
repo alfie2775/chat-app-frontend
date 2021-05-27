@@ -6,7 +6,7 @@ import ChatInfo from "./ChatInfo";
 const MainChat = () => {
   const currentChat = useSelector((state) => state.currentChat);
 
-  if (currentChat === null) return <></>;
+  if ("whoIsGay" in currentChat) return <></>;
 
   return (
     <Container>

@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { setChats, setFriends, setIncomingReqs } from "../redux/actions";
+import {
+  setChats,
+  setFriends,
+  setIncomingReqs,
+  refreshCurrentChat,
+} from "../redux/actions";
 import { useDispatch, useSelector } from "../redux/hooks";
 import { getAllUserData } from "../utils/api";
 import Sidebar from "./Sidebar";
@@ -22,6 +27,7 @@ const Main = () => {
       dispatch(setFriends(friends));
       dispatch(setIncomingReqs(incomingReq));
       dispatch({ type: "SET_SOCKET", payload: user._id });
+      dispatch(refreshCurrentChat(chats));
       setLoading(false);
     }
     helper();
@@ -29,7 +35,7 @@ const Main = () => {
     return () => {
       didCancel = true;
     };
-  }, [dispatch, user._id]);
+  });
 
   if (loading) return <></>;
 

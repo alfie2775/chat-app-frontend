@@ -21,7 +21,6 @@ const Messages = () => {
   const chat: PersonalChat | GroupChat = useSelector(
     (state) => state.currentChat
   );
-  console.log(chat);
   const socket: Socket = useSelector((state) => state.socket);
   const [text, setText] = useState("");
   const handleSubmit = (e: any) => {
@@ -37,9 +36,10 @@ const Messages = () => {
         groupId: chat._id,
       });
     }
+    setText("");
   };
 
-  useEffect(() => console.log("fuck chats"), [chat]);
+  useEffect(() => setText(""), [chat]);
 
   return (
     <>

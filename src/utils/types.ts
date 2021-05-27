@@ -2,6 +2,7 @@ export interface User {
   firstname: string;
   lastname: string;
   username: string;
+  group: string[];
   _id: string;
   createdAt: string;
   updatedAt: string;
@@ -44,6 +45,7 @@ export interface GroupChat {
   _id: string;
   name: string;
   messages: GroupMessage[];
+  admins: User[];
   members: User[];
   createdAt: string;
   updatedAt: string;

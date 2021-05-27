@@ -114,3 +114,29 @@ export const acceptRequest = async (addId: string) => {
     .then((res) => res.data);
   return res;
 };
+
+export const removeMemberFromGroup = async (user: string, groupId: string) => {
+  return await axios
+    .post(
+      api + "/groups/remove-member",
+      { user, groupId },
+      {
+        headers: getHeaders(),
+      }
+    )
+    .then((res) => res.data)
+    .catch((err) => ({ err, succces: false }));
+};
+
+export const addMemberToGroup = async (user: string, groupId: string) => {
+  return await axios
+    .post(
+      api + "/groups/add",
+      { user, groupId },
+      {
+        headers: getHeaders(),
+      }
+    )
+    .then((res) => res.data)
+    .catch((err) => ({ err }));
+};

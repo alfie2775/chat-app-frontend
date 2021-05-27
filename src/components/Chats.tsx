@@ -32,7 +32,7 @@ const Chats: React.FC<{ chats: ChatsType; isEmpty: boolean }> = ({
       var newChat: any = {};
       let newChats = chats.map((chat) => {
         if ("to" in chat && "to" in msg) {
-          if (chat.to._id === msg.from) {
+          if (chat.to._id === msg.to || chat.to._id === msg.from) {
             newChat = chat;
             newChat.messages = [...newChat.messages, msg];
             newChat.updatedAt = msg.updatedAt;
@@ -48,12 +48,11 @@ const Chats: React.FC<{ chats: ChatsType; isEmpty: boolean }> = ({
       });
       if ("to" in newChat && "to" in currentChat) {
         if (newChat.to._id === currentChat.to._id) {
-          dispatch(setCurrentChat(newChat));
+          dispatch(setCurrentChat({ ...newChat }));
         }
       } else if ("name" in currentChat && "name" in newChat) {
         if (currentChat._id === newChat._id) {
-          dispatch(setCurrentChat(newChat));
-          console.log(currentChat.messages[currentChat.messages.length - 1]);
+          dispatch(setCurrentChat({ ...newChat }));
         }
       }
       dispatch(setChats(newChats));
