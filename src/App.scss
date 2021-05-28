@@ -1,31 +1,24 @@
 .messages {
   height: 80vh;
   overflow-y: scroll;
+  .date-message {
+    display: grid;
+    place-items: center;
+  }
+  ::-webkit-scrollbar {
+    width: 0.25rem;
+  }
 }
-
-.messages .date-message {
-  display: -ms-grid;
-  display: grid;
-  place-items: center;
-}
-
-.messages ::-webkit-scrollbar {
-  width: 0.25rem;
-}
-
 .chat-info {
   height: 10vh;
 }
-
 .send-message-form {
   height: 9vh;
 }
-
 body,
 html {
   overflow: hidden;
 }
-
 .messages::-webkit-scrollbar {
   width: 0.25rem;
 }
@@ -37,4 +30,3 @@ html {
 .messages::-webkit-scrollbar-thumb {
   background: darkgray;
 }
-/*# sourceMappingURL=App.css.map */

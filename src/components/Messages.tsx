@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Button,
   Col,
@@ -23,6 +23,8 @@ const Messages = () => {
   );
   const socket: Socket = useSelector((state) => state.socket);
   const [text, setText] = useState("");
+  const ref = useRef<HTMLDivElement>(null);
+  let prevDate = "";
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if ("to" in chat) {
@@ -39,18 +41,37 @@ const Messages = () => {
     setText("");
   };
 
-  useEffect(() => setText(""), [chat]);
+  useEffect(() => {
+    setText("");
+    (ref.current?.lastChild as any).scrollIntoView();
+  }, [chat]);
 
   return (
     <>
-      <Row>
-        {chat.messages.map((msg: PersonalMessage | GroupMessage) => (
-          <Col key={msg._id} sm={12}>
-            <Message msg={msg} />
-          </Col>
-        ))}
+      <Row className="messages" ref={ref}>
+        {chat.messages.map((msg: PersonalMessage | GroupMessage) => {
+          let currDate = new Date(msg.createdAt).toLocaleDateString();
+          if (prevDate !== currDate) {
+            prevDate = currDate;
+            return (
+              <>
+                <div className="date-message">
+                  <span>{currDate}</span>
+                </div>
+                <Col key={msg._id} sm={12}>
+                  <Message msg={msg} />
+                </Col>
+              </>
+            );
+          }
+          return (
+            <Col key={msg._id} sm={12}>
+              <Message msg={msg} />
+            </Col>
+          );
+        })}
       </Row>
-      <Row>
+      <Row className="send-message-form">
         <Form onSubmit={handleSubmit}>
           <FormGroup>
             <FormControl

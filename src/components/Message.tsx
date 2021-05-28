@@ -13,7 +13,9 @@ const Message: FC<{ msg: PersonalMessage | GroupMessage }> = ({ msg }) => {
     <div
       style={{
         marginLeft: userMessage ? "auto" : "20px",
+        marginRight: userMessage ? "20px" : "0",
         maxWidth: "70%",
+        textAlign: userMessage ? "end" : "start",
       }}
     >
       <Linkify
@@ -31,8 +33,12 @@ const Message: FC<{ msg: PersonalMessage | GroupMessage }> = ({ msg }) => {
       >
         {msg.text}
       </Linkify>
-      <p style={{ textAlign: "end" }}>
-        {new Date(msg.createdAt).toLocaleTimeString()}
+      <p
+        style={{ textAlign: userMessage ? "end" : "start", fontSize: "small" }}
+      >
+        {new Date(msg.createdAt)
+          .toLocaleTimeString()
+          .replace(/:[0-9][0-9] /, " ")}
       </p>
     </div>
   );

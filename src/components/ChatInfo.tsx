@@ -11,7 +11,7 @@ const ChatInfo = () => {
   );
   const [show, setShow] = useState(false);
   return (
-    <Row>
+    <Row className="chat-info">
       <Col sm={3}>IMG</Col>
       <Col onClick={() => setShow(!show)}>
         {"to" in chat ? chat.to.firstname + " " + chat.to.lastname : chat.name}
