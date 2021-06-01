@@ -1,6 +1,7 @@
 import { Dispatch, FC, SetStateAction, useRef } from "react";
 import { Col, FormControl, Row } from "react-bootstrap";
 import { Chats } from "../utils/types";
+import styles from "../styles/Searchbar.module.css";
 
 interface Props {
   chats: Chats;
@@ -30,8 +31,15 @@ const Searchbar: FC<Props> = ({ chats, setSearchedChats }) => {
 
   return (
     <Row>
-      <Col sm={12}>
-        <FormControl type="text" ref={ref} onChange={handleSearch} />
+      <Col sm={12} className="d-flex justify-content-center">
+        <FormControl
+          className={styles.input}
+          placeholder="Search for chats"
+          aria-label="search-chats"
+          type="text"
+          ref={ref}
+          onChange={handleSearch}
+        />
       </Col>
     </Row>
   );

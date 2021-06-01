@@ -7,9 +7,10 @@ import {
   GroupMessage,
   PersonalChat,
   PersonalMessage,
+  User,
 } from "../utils/types";
 import { Socket } from "socket.io-client";
-import { setChats, setCurrentChat } from "../redux/actions";
+import { addIncomingReq, setChats, setCurrentChat } from "../redux/actions";
 
 const Chats: React.FC<{ chats: ChatsType; isEmpty: boolean }> = ({
   chats,
@@ -27,7 +28,7 @@ const Chats: React.FC<{ chats: ChatsType; isEmpty: boolean }> = ({
       : -1;
   });
 
-  const addPersonalMessage = useCallback(
+  const addMessage = useCallback(
     (msg: PersonalMessage | GroupMessage) => {
       var newChat: any = {};
       let newChats = chats.map((chat) => {
@@ -60,15 +61,24 @@ const Chats: React.FC<{ chats: ChatsType; isEmpty: boolean }> = ({
     [dispatch, chats, currentChat]
   );
 
+  const addFriendRequest = useCallback(
+    (user: User) => {
+      dispatch(addIncomingReq(user));
+    },
+    [dispatch]
+  );
+
   useEffect(() => {
-    socket.on("incoming personal message", addPersonalMessage);
-    socket.on("incoming group message", addPersonalMessage);
+    socket.on("incoming personal message", addMessage);
+    socket.on("incoming group message", addMessage);
+    socket.on("incoming friend request", addFriendRequest);
 
     return () => {
-      socket.off("incoming personal message", addPersonalMessage);
-      socket.off("incoming group message", addPersonalMessage);
+      socket.off("incoming personal message", addMessage);
+      socket.off("incoming group message", addMessage);
+      socket.off("incoming friend request", addFriendRequest);
     };
-  }, [socket, addPersonalMessage]);
+  }, [socket, addMessage, addFriendRequest]);
 
   if (isEmpty) return <>You have no friends. Add your friends and have fun</>;
 
@@ -77,11 +87,11 @@ const Chats: React.FC<{ chats: ChatsType; isEmpty: boolean }> = ({
   }
 
   return (
-    <>
+    <div className="chats">
       {sortedChats.map((chat, idx) => (
         <Chat chat={chat} key={idx} idx={idx} />
       ))}
-    </>
+    </div>
   );
 };
 

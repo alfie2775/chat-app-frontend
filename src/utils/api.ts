@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getHeaders } from "./index";
-export const api = false
+export const api = true
   ? "http://localhost:5000"
   : "https://kite-backend.herokuapp.com";
 
@@ -139,4 +139,59 @@ export const addMemberToGroup = async (user: string, groupId: string) => {
     )
     .then((res) => res.data)
     .catch((err) => ({ err }));
+};
+
+export const searchUsers = async (name: string) => {
+  return await axios
+    .post(
+      api + "/users/search",
+      { name },
+      {
+        headers: getHeaders(),
+      }
+    )
+    .then((res) => res.data)
+    .catch((err) => ({ err, success: false }));
+};
+
+export const removeFriend = async (deleteId: string) => {
+  return await axios
+    .post(
+      api + "/users/remove-friend",
+      { deleteId },
+      {
+        headers: getHeaders(),
+      }
+    )
+    .then((res) => res.data)
+    .catch((err) => ({
+      success: false,
+      err,
+    }));
+};
+
+export const addAdminToGroup = async (admin: string, groupId: string) => {
+  return await axios
+    .post(
+      api + "/groups/add-admin",
+      { admin, groupId },
+      {
+        headers: getHeaders(),
+      }
+    )
+    .then((res) => res.data)
+    .catch((err) => ({ err, success: false }));
+};
+
+export const removeAdminFromGroup = async (admin: string, groupId: string) => {
+  return await axios
+    .post(
+      api + "/groups/remove-admin",
+      { groupId, admin },
+      {
+        headers: getHeaders(),
+      }
+    )
+    .then((res) => res.data)
+    .catch((err) => ({ err, success: false }));
 };

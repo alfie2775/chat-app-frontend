@@ -1,6 +1,12 @@
+:root {
+  --bg-color: #292828;
+}
+
 .messages {
   height: 80vh;
   overflow-y: scroll;
+  padding-top: auto;
+  overflow: -moz-hidden-unscrollable;
 }
 
 .messages .date-message {
@@ -9,32 +15,163 @@
   place-items: center;
 }
 
-.messages ::-webkit-scrollbar {
-  width: 0.25rem;
+.messages .date-message span {
+  background: #3f3e3e;
+  padding: 5px 8px;
+  border-radius: 10px;
+}
+
+.messages .message {
+  border-radius: 15px;
+  padding: 10px 13px;
+  margin: 0.4rem 0;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  background: #3f3e3e;
+}
+
+.row {
+  padding-bottom: 0.5rem;
+}
+
+.user-info {
+  height: 10vh;
+  background: #363535;
+  margin-left: 0.2rem !important;
+}
+
+.user-info .username {
+  font-size: 1.7rem;
+}
+
+.image {
+  height: 50px;
+  border-radius: 50%;
+}
+
+.cb-open {
+  pointer-events: all;
+  opacity: 1;
+}
+
+.cb-close {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.chats {
+  height: 80vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.chats :last-child {
+  border-bottom: none;
+}
+
+.chats .chat {
+  margin-left: 0.2rem;
+}
+
+.chats :hover {
+  background: #2e2e2e;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.selected-chat {
+  background: #2e2e2e !important;
+}
+
+.chat-info-modal {
+  border-radius: 0 !important;
+  width: 100%;
+  height: 40vh;
 }
 
 .chat-info {
-  height: 10vh;
+  height: 10vh !important;
+  background: #363535;
+}
+
+.chat-info :last-child {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  font-size: 1.5rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .send-message-form {
-  height: 9vh;
+  height: 10vh;
+}
+
+.send-message-form .form-group {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.send-message-form .form-group input {
+  width: 90%;
+  display: inline-block;
+  margin-right: auto;
+}
+
+.container-fluid {
+  padding: 0 !important;
+}
+
+.row {
+  margin-top: 0.2rem !important;
 }
 
 body,
 html {
-  overflow: hidden;
+  height: 100vh;
+  width: 98vw;
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: var(--bg-color) !important;
+  color: white !important;
 }
 
+.chats::-webkit-scrollbar,
 .messages::-webkit-scrollbar {
   width: 0.25rem;
 }
 
+.chats::-webkit-scrollbar-track,
 .messages::-webkit-scrollbar-track {
-  background: lightgrey;
+  background: transparent;
 }
 
+.chats::-webkit-scrollbar-thumb,
 .messages::-webkit-scrollbar-thumb {
   background: darkgray;
+}
+
+.modal-body,
+.modal-title {
+  background: var(--bg-color);
+}
+
+input {
+  background: transparent !important;
+  color: white !important;
 }
 /*# sourceMappingURL=App.css.map */

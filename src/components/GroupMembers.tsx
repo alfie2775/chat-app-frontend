@@ -12,7 +12,7 @@ const GroupMembers = ({
   isAdmin: User | undefined;
   user: User;
   chat: GroupChat;
-  handleAdminRemove: () => void;
+  handleAdminRemove: (id: string) => void;
   handleMemberRemove: (id: string) => void;
   [key: string]: any;
 }) => {
@@ -27,7 +27,7 @@ const GroupMembers = ({
             <Member
               key={admin._id}
               member={admin}
-              onButtonClick={handleAdminRemove}
+              onButtonClick={() => handleAdminRemove(admin._id)}
               buttonProps={{ className: "btn-sm", variant: "danger" }}
               buttonText="Remove"
               afterText="Removed"

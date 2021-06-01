@@ -8,7 +8,8 @@ export const chats: (state: Chats | [], action: ReduxAction) => Chats | [] = (
     case "SET_CHATS":
       return action.payload;
     case "ADD_CHAT":
-      return [action.payload, ...state];
+      let newState = [action.payload, ...state];
+      return newState;
     case "REMOVE_CHAT":
       return state.filter((chat) => chat._id !== action.payload);
     case "REMOVE_GROUP_MEMBER":
@@ -29,13 +30,24 @@ export const chats: (state: Chats | [], action: ReduxAction) => Chats | [] = (
         return chat;
       });
     }
+    case "ADD_GROUP_ADMIN": {
+      return state.map((chat: any) => {
+        if ("name" in chat) {
+          if (chat._id === action.payload.groupId) {
+            chat.admins = [...chat.admins, action.payload.user];
+          }
+        }
+        return chat;
+      });
+    }
     case "REMOVE_GROUP_ADMIN":
-      return state.filter((chat) => {
+      return state.map((chat: any) => {
         if ("name" in chat)
           if (chat._id === action.payload.groupId)
-            if (chat.admins.find((admin) => admin._id === action.payload.id))
-              return false;
-        return true;
+            chat.admin = chat.admins.filter(
+              (member: User) => member._id !== action.payload.id
+            );
+        return chat;
       });
     default:
       return state;

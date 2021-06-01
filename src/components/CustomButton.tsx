@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "react-bootstrap";
 import CustomButtonLoading from "./CustomButtonLoading";
 
@@ -15,18 +15,28 @@ const CustomButton = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const [buttonText, setButtonText] = useState(text);
+  const [clicked, setClicked] = useState(false);
+  const ref = useRef(false);
   const onClick = async (e: any) => {
     if (typeof onButtonClick === "function") {
       setLoading(true);
       await onButtonClick();
-      console.log(text, afterText);
+      if (ref.current) return;
       setButtonText(afterText || text);
       setLoading(false);
+      setClicked(true);
     }
   };
 
+  useEffect(
+    () => () => {
+      ref.current = true;
+    },
+    []
+  );
+
   return (
-    <Button {...buttonProps} onClick={onClick}>
+    <Button disabled={clicked} {...buttonProps} onClick={onClick}>
       {loading ? <CustomButtonLoading /> : buttonText}
     </Button>
   );

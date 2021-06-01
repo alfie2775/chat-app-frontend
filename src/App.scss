@@ -1,32 +1,144 @@
+:root {
+  --bg-color: #292828;
+}
+
+$tc: white;
+$bg-color-2: #3f3e3e;
+$hoverColor: rgb(46, 46, 46);
+
 .messages {
   height: 80vh;
   overflow-y: scroll;
+  padding-top: auto;
+  overflow: -moz-hidden-unscrollable;
   .date-message {
     display: grid;
     place-items: center;
+    span {
+      background: $bg-color-2;
+      padding: 5px 8px;
+      border-radius: 10px;
+    }
   }
-  ::-webkit-scrollbar {
-    width: 0.25rem;
+  .message {
+    border-radius: 15px;
+    padding: 10px 13px;
+    margin: 0.4rem 0;
+    width: fit-content;
+    height: fit-content;
+    background: $bg-color-2;
   }
+}
+.row {
+  padding-bottom: 0.5rem;
+}
+.user-info {
+  height: 10vh;
+  background: #363535;
+  margin-left: 0.2rem !important;
+  .username {
+    font-size: 1.7rem;
+  }
+}
+
+.image {
+  height: 50px;
+  border-radius: 50%;
+}
+
+.cb-open {
+  pointer-events: all;
+  opacity: 1;
+}
+.cb-close {
+  pointer-events: none;
+  opacity: 0;
+}
+.chats {
+  height: 80vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  :last-child {
+    border-bottom: none;
+  }
+  .chat {
+    margin-left: 0.2rem;
+  }
+  :hover {
+    background: $hoverColor;
+  }
+}
+.clickable {
+  cursor: pointer;
+}
+.selected-chat {
+  background: $hoverColor !important;
+}
+.chat-info-modal {
+  border-radius: 0 !important;
+  width: 100%;
+  height: 40vh;
 }
 .chat-info {
-  height: 10vh;
+  height: 10vh !important;
+  :last-child {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 1.5rem;
+    align-items: center;
+  }
+
+  background: #363535;
 }
 .send-message-form {
-  height: 9vh;
+  height: 10vh;
+  .form-group {
+    width: 100%;
+    display: flex;
+    input {
+      width: 90%;
+      display: inline-block;
+      margin-right: auto;
+    }
+  }
+}
+.container-fluid {
+  padding: 0 !important;
+}
+.row {
+  margin-top: 0.2rem !important;
 }
 body,
 html {
-  overflow: hidden;
+  height: 100vh;
+  width: 98vw;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background-color: var(--bg-color) !important;
+  color: white !important;
 }
+.chats::-webkit-scrollbar,
 .messages::-webkit-scrollbar {
   width: 0.25rem;
 }
 
+.chats::-webkit-scrollbar-track,
 .messages::-webkit-scrollbar-track {
-  background: lightgrey;
+  background: transparent;
 }
 
+.chats::-webkit-scrollbar-thumb,
 .messages::-webkit-scrollbar-thumb {
   background: darkgray;
+}
+
+.modal-body,
+.modal-title {
+  background: var(--bg-color);
+}
+
+input {
+  background: transparent !important;
+  color: $tc !important;
 }

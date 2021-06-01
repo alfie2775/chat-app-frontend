@@ -1,6 +1,7 @@
 import { Col, Row } from "react-bootstrap";
 import { useSelector } from "../redux/hooks";
 import { Chats, PersonalChat, User } from "../utils/types";
+import Image from "./Image";
 
 const PersonalChatInfo = ({ chat }: { chat: PersonalChat }) => {
   const user: User = useSelector((state) => state.user);
@@ -9,11 +10,11 @@ const PersonalChatInfo = ({ chat }: { chat: PersonalChat }) => {
     <>
       <Row>
         <Col sm={12}>
-          <p>Name: {chat.to.firstname + " " + chat.to.lastname}</p>
+          <p className="title">{chat.to.firstname + " " + chat.to.lastname}</p>
         </Col>
         <Col sm={12}>
           <p>
-            Username: <span>{chat.to.username}</span>
+            @<span>{chat.to.username}</span>
           </p>
         </Col>
         <Row>
@@ -21,13 +22,16 @@ const PersonalChatInfo = ({ chat }: { chat: PersonalChat }) => {
             <p>Mutual Groups</p>
             {chats
               .filter(
-                (chat) =>
-                  "name" in chat &&
-                  chat.members.find((member) => member._id === user._id)
+                (Chat) =>
+                  "name" in Chat &&
+                  Chat.members.find((member) => member._id === user._id) &&
+                  Chat.members.find((member) => member._id === chat.to._id)
               )
               .map((group) => (
                 <Row key={group._id}>
-                  <Col sm={3}>IMG</Col>
+                  <Col sm={3}>
+                    <Image src={chat.to.img} alt={chat.to.username} />
+                  </Col>
                   <Col>{(group as any).name}</Col>
                 </Row>
               ))}

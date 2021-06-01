@@ -40,12 +40,12 @@ const Main = () => {
   if (loading) return <></>;
 
   return (
-    <Container fluid style={{ height: "100vh" }}>
+    <Container fluid style={{ height: "100vh", maxWidth: "98vw" }}>
       <Row>
-        <Col sm={12} md={5} style={{ height: "100vh" }}>
+        <Col sm={12} md={4} style={{ height: "100vh" }}>
           <Sidebar />
         </Col>
-        <Col style={{ height: "100vh" }}>
+        <Col sm={12} md={8} style={{ height: "100vh" }}>
           <MainChat />
         </Col>
       </Row>

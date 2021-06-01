@@ -7,7 +7,7 @@ export const incomingReq: (
   switch (action.type) {
     case "SET_INCOMING_REQS":
       return action.payload;
-    case "ADD_INCOMIN_REQ":
+    case "ADD_INCOMING_REQ":
       return [...state, action.payload];
     case "REMOVE_INCOMING_REQ":
       return state.filter(

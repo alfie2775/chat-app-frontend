@@ -16,7 +16,7 @@ export const addChat = (chat: PersonalChat | GroupChat) => ({
   payload: chat,
 });
 
-export const deleteFriends = (id: User) => ({
+export const deleteFriend = (id: string) => ({
   type: "REMOVE_FRIEND",
   payload: id,
 });
@@ -77,5 +77,13 @@ export const addGroupMember = (id: string, member: User): ReduxAction => ({
   payload: {
     id,
     member,
+  },
+});
+
+export const addAdmin = (groupId: string, user: User) => ({
+  type: "ADD_GROUP_ADMIN",
+  payload: {
+    groupId,
+    user,
   },
 });

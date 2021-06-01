@@ -9,7 +9,7 @@ const MainChat = () => {
   if ("whoIsGay" in currentChat) return <></>;
 
   return (
-    <Container>
+    <Container fluid>
       <ChatInfo />
       <Messages />
     </Container>

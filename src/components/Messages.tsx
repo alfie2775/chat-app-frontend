@@ -43,7 +43,11 @@ const Messages = () => {
 
   useEffect(() => {
     setText("");
-    (ref.current?.lastChild as any).scrollIntoView();
+    if (ref.current?.lastChild)
+      (ref.current?.lastChild as any).scrollIntoView({
+        block: "nearest",
+        inline: "start",
+      });
   }, [chat]);
 
   return (
@@ -54,27 +58,28 @@ const Messages = () => {
           if (prevDate !== currDate) {
             prevDate = currDate;
             return (
-              <>
+              <div style={{ paddingLeft: 0 }} key={msg._id}>
                 <div className="date-message">
                   <span>{currDate}</span>
                 </div>
-                <Col key={msg._id} sm={12}>
+                <div style={{ height: "fit-content" }}>
                   <Message msg={msg} />
-                </Col>
-              </>
+                </div>
+              </div>
             );
           }
           return (
-            <Col key={msg._id} sm={12}>
+            <div key={msg._id}>
               <Message msg={msg} />
-            </Col>
+            </div>
           );
         })}
       </Row>
-      <Row className="send-message-form">
+      <Row className="send-message-form" style={{ margin: 0, padding: 0 }}>
         <Form onSubmit={handleSubmit}>
           <FormGroup>
             <FormControl
+              aria-label="send-message"
               type="text"
               required
               value={text}

@@ -11,18 +11,24 @@ const Message: FC<{ msg: PersonalMessage | GroupMessage }> = ({ msg }) => {
 
   return (
     <div
+      className="message"
       style={{
-        marginLeft: userMessage ? "auto" : "20px",
-        marginRight: userMessage ? "20px" : "0",
+        marginLeft: userMessage ? "auto" : "10px",
+        marginRight: userMessage ? "10px" : "0",
         maxWidth: "70%",
+        wordWrap: "break-word",
         textAlign: userMessage ? "end" : "start",
+        [`borderBottom${userMessage ? "Right" : "Left"}Radius`]: "1px",
       }}
     >
       <Linkify
         componentDecorator={(decoratedHref, decoratedText, key) => (
           <a
             target="_blank"
-            style={{ textAlign: "end" }}
+            style={{
+              color: "lightgrey",
+              textAlign: "end",
+            }}
             rel="noreferrer"
             href={decoratedHref}
             key={key}
@@ -33,13 +39,13 @@ const Message: FC<{ msg: PersonalMessage | GroupMessage }> = ({ msg }) => {
       >
         {msg.text}
       </Linkify>
-      <p
+      <div
         style={{ textAlign: userMessage ? "end" : "start", fontSize: "small" }}
       >
         {new Date(msg.createdAt)
           .toLocaleTimeString()
           .replace(/:[0-9][0-9] /, " ")}
-      </p>
+      </div>
     </div>
   );
 };

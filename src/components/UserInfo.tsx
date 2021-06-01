@@ -1,6 +1,5 @@
 import { Dispatch, useState, SetStateAction } from "react";
 import {
-  Container,
   Row,
   Col,
   Dropdown,
@@ -18,7 +17,9 @@ import { addChat, resetState } from "../redux/actions";
 import { useSelector, useDispatch } from "../redux/hooks";
 import { createGroup, logout } from "../utils/api";
 import { User } from "../utils/types";
+import FriendsModal from "./FriendsModal";
 import IncomingReq from "./IncomingReq";
+import Image from "./Image";
 
 const Options = ({
   setModal,
@@ -92,19 +93,27 @@ const Options = ({
 function UserInfo() {
   const user: User = useSelector((state) => state.user);
   const [modal, setModal] = useState(false);
+  const [flag, setFlag] = useState(false);
   return (
-    <Container>
-      <Row>
-        <Col sm={3}>img</Col>
-        <Col sm={5}>{user.username}</Col>
+    <>
+      <Row className="user-info">
+        <Col sm={3}>
+          <Image src={user.img} alt={user.username} />
+        </Col>
+        <Col className="d-flex align-items-center username justify-content-center">
+          {user.username}
+        </Col>
         <Options setModal={setModal} />
       </Row>
       <Modal onHide={() => setModal(!modal)} show={modal}>
-        <ModalBody>
-          <IncomingReq />
-        </ModalBody>
+        <ModalTitle>
+          <Button onClick={(e: any) => setFlag(!flag)}>
+            {flag ? "Friend Requests" : "Friends List"}
+          </Button>
+        </ModalTitle>
+        <ModalBody>{flag ? <FriendsModal /> : <IncomingReq />}</ModalBody>
       </Modal>
-    </Container>
+    </>
   );
 }
 
