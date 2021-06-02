@@ -82,6 +82,58 @@
   right: 5%;
 }
 
+.m-l {
+  height: 100vh;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
+.m-l div {
+  border: 10px solid white;
+  opacity: 0;
+  border-radius: 50%;
+  background: transparent;
+  -webkit-animation: loading 3s infinite;
+          animation: loading 3s infinite;
+}
+
+@-webkit-keyframes loading {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 0;
+  }
+  50% {
+    height: 150px;
+    width: 150px;
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    height: 0;
+    width: 0;
+  }
+}
+
+@keyframes loading {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 0;
+  }
+  50% {
+    height: 150px;
+    width: 150px;
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    height: 0;
+    width: 0;
+  }
+}
+
 .mobile {
   position: absolute;
   left: 0;
