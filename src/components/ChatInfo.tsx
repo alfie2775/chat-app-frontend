@@ -13,7 +13,7 @@ const ChatInfo = () => {
   const [show, setShow] = useState(false);
   return (
     <Row className="chat-info">
-      <Col sm={3}>
+      <Col sm={3} className="d-flex align-items-center justify-content-center">
         <Image
           src={"to" in chat ? chat.to.img : chat.img}
           alt={"to" in chat ? chat.to.username : chat.name}

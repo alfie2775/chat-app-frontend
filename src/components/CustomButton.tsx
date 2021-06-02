@@ -36,7 +36,12 @@ const CustomButton = ({
   );
 
   return (
-    <Button disabled={clicked} {...buttonProps} onClick={onClick}>
+    <Button
+      style={{ marginTop: "50%", transform: "translateY(-50%)" }}
+      disabled={clicked}
+      {...buttonProps}
+      onClick={onClick}
+    >
       {loading ? <CustomButtonLoading /> : buttonText}
     </Button>
   );

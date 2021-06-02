@@ -1,12 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  Button,
-  Col,
-  Form,
-  FormControl,
-  FormGroup,
-  Row,
-} from "react-bootstrap";
+import { Button, Form, FormControl, FormGroup, Row } from "react-bootstrap";
 import { Socket } from "socket.io-client";
 import { useSelector } from "../redux/hooks";
 import {
@@ -83,6 +76,7 @@ const Messages = () => {
               type="text"
               required
               value={text}
+              placeholder="Type your message"
               onChange={(e) => setText(e.target.value)}
             />
             <Button type="submit">Send</Button>

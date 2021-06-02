@@ -43,18 +43,31 @@ const Options = ({
 
   return (
     <Col className="d-flex  justify-content-around align-items-center">
-      <i onClick={() => setModal(true)} className="fas fa-user-friends"></i>
+      <span
+        onClick={() => setModal(true)}
+        className="fas fa-user-friends"
+      ></span>
       <Dropdown>
-        <Dropdown.Toggle aria-label="option-dropdown">
+        <Dropdown.Toggle className="dropdown-" aria-label="option-dropdown">
           <i className="fas fa-ellipsis-v"></i>
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
           <Dropdown.Item onClick={toggleModal}>
-            <i className="fas fa-users"></i> New Group
+            <Row>
+              <Col sm={2}>
+                <span className="fas fa-users"></span>
+              </Col>{" "}
+              <Col sm={10}> New Group</Col>
+            </Row>
           </Dropdown.Item>
           <Dropdown.Item>
-            <i className="fas fa-cog mr-1"></i> Settings
+            <Row>
+              <Col sm={2}>
+                <i className="fas fa-cog mr-1"></i>
+              </Col>{" "}
+              <Col sm={10}> Settings</Col>
+            </Row>
           </Dropdown.Item>
           <Dropdown.Item
             onClick={(e) => {
@@ -63,7 +76,12 @@ const Options = ({
               history.push("/");
             }}
           >
-            <i className="fas fa-sign-out-alt mr-1"></i> Sign out
+            <Row>
+              <Col sm={2}>
+                <i className="fas fa-sign-out-alt mr-1"></i>
+              </Col>{" "}
+              <Col sm={10}> Sign out</Col>
+            </Row>
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
@@ -97,7 +115,10 @@ function UserInfo() {
   return (
     <>
       <Row className="user-info">
-        <Col sm={3}>
+        <Col
+          sm={3}
+          className="d-flex align-items-center justify-content-center"
+        >
           <Image src={user.img} alt={user.username} />
         </Col>
         <Col className="d-flex align-items-center username justify-content-center">
@@ -106,8 +127,8 @@ function UserInfo() {
         <Options setModal={setModal} />
       </Row>
       <Modal onHide={() => setModal(!modal)} show={modal}>
-        <ModalTitle>
-          <Button onClick={(e: any) => setFlag(!flag)}>
+        <ModalTitle className="d-flex justify-content-center pt-2">
+          <Button variant="outline-light" onClick={(e: any) => setFlag(!flag)}>
             {flag ? "Friend Requests" : "Friends List"}
           </Button>
         </ModalTitle>

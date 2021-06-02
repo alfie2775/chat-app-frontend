@@ -1,5 +1,45 @@
 :root {
-  --bg-color: #292828;
+  --bg-color: #222222;
+  font-size: 15px;
+}
+
+.about-wrapper {
+  height: 80%;
+}
+
+.about {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+}
+
+.about img {
+  width: 300px;
+  height: 300px;
+}
+
+.about h1 {
+  position: relative;
+  top: -30px;
+  font-family: "Sigmar One", cursive;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.about p {
+  font-size: 1.2rem;
+}
+
+.about a {
+  text-decoration: none;
 }
 
 .messages {
@@ -16,7 +56,7 @@
 }
 
 .messages .date-message span {
-  background: #3f3e3e;
+  background: #363535;
   padding: 5px 8px;
   border-radius: 10px;
 }
@@ -31,7 +71,72 @@
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  background: #3f3e3e;
+  background: #363535;
+}
+
+.chatting {
+  width: 80%;
+  height: 80%;
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+}
+
+.mobile {
+  position: absolute;
+  left: 0;
+  top: 60%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  width: 40%;
+  height: 40%;
+}
+
+.login-wrapper {
+  overflow-y: scroll;
+}
+
+.login-logo {
+  margin-top: 1rem;
+  width: 100px;
+  height: 100px;
+}
+
+.login-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 40vh;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.signup-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 70vh;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.login-signup {
+  cursor: pointer;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.login-signup:hover {
+  text-decoration: underline;
 }
 
 .row {
@@ -40,12 +145,47 @@
 
 .user-info {
   height: 10vh;
-  background: #363535;
+  background: #272626;
   margin-left: 0.2rem !important;
+}
+
+.user-info > .fas {
+  font-size: 1.3rem;
 }
 
 .user-info .username {
   font-size: 1.7rem;
+}
+
+.tab-content {
+  padding-top: 1rem;
+}
+
+.dropdown- {
+  background: transparent !important;
+  border: none !important;
+}
+
+.dropdown-::after {
+  content: none !important;
+}
+
+.dropdown-:focus {
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+}
+
+.fas:hover {
+  cursor: pointer;
+}
+
+.chat-title {
+  font-size: large;
+}
+
+.chat-time {
+  margin-left: 15px;
+  font-size: small;
 }
 
 .image {
@@ -75,10 +215,12 @@
 
 .chats .chat {
   margin-left: 0.2rem;
+  padding-bottom: 1rem;
+  padding-top: 0.6rem;
 }
 
 .chats :hover {
-  background: #2e2e2e;
+  background: #313131;
 }
 
 .clickable {
@@ -86,7 +228,7 @@
 }
 
 .selected-chat {
-  background: #2e2e2e !important;
+  background: #313131 !important;
 }
 
 .chat-info-modal {
@@ -97,7 +239,7 @@
 
 .chat-info {
   height: 10vh !important;
-  background: #363535;
+  background: #272626;
 }
 
 .chat-info :last-child {
@@ -141,26 +283,34 @@
 body,
 html {
   height: 100vh;
-  width: 98vw;
+  width: 99.15vw;
+  overflow: hidden;
   padding: 0;
   margin: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   background-color: var(--bg-color) !important;
   color: white !important;
+  font-family: "Poppins", sans-serif !important;
 }
 
 .chats::-webkit-scrollbar,
+body::-webkit-scrollbar,
+.login-wrapper::-webkit-scrollbar,
 .messages::-webkit-scrollbar {
   width: 0.25rem;
 }
 
 .chats::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+.login-wrapper::-webkit-scrollbar-track,
 .messages::-webkit-scrollbar-track {
   background: transparent;
 }
 
 .chats::-webkit-scrollbar-thumb,
+.body::-webkit-scrollbar-thumb,
+.login-wrapper::-webkit-scrollbar-thumb,
 .messages::-webkit-scrollbar-thumb {
   background: darkgray;
 }
@@ -173,5 +323,30 @@ html {
 input {
   background: transparent !important;
   color: white !important;
+  border-radius: 9px !important;
+  border: white ridge 2px !important;
+}
+
+.titles h1 {
+  font-family: "Sigmar One", cursive;
+}
+
+@media (max-width: 991px) {
+  .logo {
+    height: 150px;
+    width: 150px;
+  }
+  .titles h1 {
+    font-size: 1.8rem;
+  }
+  .titles div {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .svg-wrapper {
+    display: none;
+  }
 }
 /*# sourceMappingURL=App.css.map */

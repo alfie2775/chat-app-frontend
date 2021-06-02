@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "../redux/hooks";
 import { getAllUserData } from "../utils/api";
 import Sidebar from "./Sidebar";
 import MainChat from "./MainChat";
+import DefaultLoading from "./DefaultLoading";
 
 const Main = () => {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const Main = () => {
     };
   });
 
-  if (loading) return <></>;
+  if (loading) return <DefaultLoading />;
 
   return (
     <Container fluid style={{ height: "100vh", maxWidth: "98vw" }}>

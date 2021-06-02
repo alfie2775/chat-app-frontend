@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "AAAA,AAAA,MAAM,CAAC;EACL,KAAK,EAAE,cAAc;EACrB,MAAM,EAAE,cAAc;CACvB",
+    "mappings": "AAAA,AAAA,MAAM,CAAC;EACL,KAAK,EAAE,cAAc;EACrB,MAAM,EAAE,cAAc;EACtB,aAAa,EAAE,cAAc;EAC7B,MAAM,EAAE,0BAA0B;EAClC,MAAM,EAAE,QAAQ;CACjB",
     "sources": [
         "Searchbar.module.scss"
     ],

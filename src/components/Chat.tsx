@@ -23,6 +23,13 @@ const Chat: React.FC<{ chat: PersonalChat | GroupChat; idx: number }> = ({
     dispatch(setCurrentChat({ ...chat }));
   };
 
+  const message =
+    chat.messages.length < 1
+      ? undefined
+      : chat.messages[chat.messages.length - 1];
+  if (message === undefined) {
+  }
+
   const isSelected =
     "to" in chat && "to" in currentChat
       ? chat.to._id === currentChat.to._id
@@ -35,7 +42,7 @@ const Chat: React.FC<{ chat: PersonalChat | GroupChat; idx: number }> = ({
       className={"chat" + (isSelected ? " selected-chat" : "")}
       style={{ cursor: "pointer" }}
     >
-      <Col sm={2}>
+      <Col sm={2} className="d-flex align-items-center justify-content-center">
         <Image
           src={"to" in chat ? chat.to.img : chat.img}
           alt={"to" in chat ? chat.to.username : chat.name}
@@ -43,16 +50,21 @@ const Chat: React.FC<{ chat: PersonalChat | GroupChat; idx: number }> = ({
       </Col>
       <Col sm={10} onClick={handleClick}>
         <div className="d-flex flex-column">
-          <p>
+          <p className="chat-title">
             {"to" in chat
               ? chat.to.firstname + " " + chat.to.lastname
               : chat.name}
           </p>
-          <p>
-            {chat.messages.length > 0
-              ? chat.messages[chat.messages.length - 1].text.substr(0, 50)
-              : "This chat is empty"}
-          </p>
+          <div>
+            <span>{message?.text || "This chat is empty"}</span>
+            {message && (
+              <span className="chat-time">
+                {new Date(message.updatedAt)
+                  .toLocaleTimeString()
+                  .replace(/:[0-9][0-9] /, " ")}
+              </span>
+            )}
+          </div>
         </div>
       </Col>
     </Row>

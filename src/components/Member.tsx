@@ -32,7 +32,7 @@ const Member: React.FC<{
         </div>
       </Col>
       {buttonText !== "" && (
-        <Col sm={2}>
+        <Col sm={2} style={{ position: "relative" }}>
           <CustomButton
             text={buttonText}
             afterText={afterText}

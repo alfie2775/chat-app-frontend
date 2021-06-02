@@ -50,11 +50,17 @@ const Chats: React.FC<{ chats: ChatsType; isEmpty: boolean }> = ({
       if ("to" in newChat && "to" in currentChat) {
         if (newChat.to._id === currentChat.to._id) {
           dispatch(setCurrentChat({ ...newChat }));
+        } else {
+          new Audio("/tuturu.mpeg").play();
         }
       } else if ("name" in currentChat && "name" in newChat) {
         if (currentChat._id === newChat._id) {
           dispatch(setCurrentChat({ ...newChat }));
+        } else {
+          new Audio("/tuturu.mpeg").play();
         }
+      } else {
+        new Audio("/tuturu.mpeg").play();
       }
       dispatch(setChats(newChats));
     },

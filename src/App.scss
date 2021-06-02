@@ -1,10 +1,37 @@
 :root {
-  --bg-color: #292828;
+  --bg-color: #222222;
+  font-size: 15px;
 }
-
 $tc: white;
-$bg-color-2: #3f3e3e;
-$hoverColor: rgb(46, 46, 46);
+$bg-color-2: #363535;
+$hoverColor: rgb(49, 49, 49);
+
+.about-wrapper {
+  height: 80%;
+}
+.about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  img {
+    width: 300px;
+    height: 300px;
+  }
+  h1 {
+    position: relative;
+    top: -30px;
+    font-family: "Sigmar One", cursive;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  p {
+    font-size: 1.2rem;
+  }
+  a {
+    text-decoration: none;
+  }
+}
 
 .messages {
   height: 80vh;
@@ -29,16 +56,99 @@ $hoverColor: rgb(46, 46, 46);
     background: $bg-color-2;
   }
 }
+
+.chatting {
+  width: 80%;
+  height: 80%;
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+}
+
+.mobile {
+  position: absolute;
+  left: 0;
+  top: 60%;
+  transform: translateY(-50%);
+  width: 40%;
+  height: 40%;
+}
+
+.login-wrapper {
+  overflow-y: scroll;
+}
+
+.login-logo {
+  margin-top: 1rem;
+  width: 100px;
+  height: 100px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  height: 40vh;
+  justify-content: space-around;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  justify-content: space-around;
+}
+
+.login-signup {
+  cursor: pointer;
+  width: fit-content;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .row {
   padding-bottom: 0.5rem;
 }
 .user-info {
   height: 10vh;
-  background: #363535;
+  background: #272626;
   margin-left: 0.2rem !important;
+  & > .fas {
+    font-size: 1.3rem;
+  }
   .username {
     font-size: 1.7rem;
   }
+}
+
+.tab-content {
+  padding-top: 1rem;
+}
+
+.dropdown- {
+  background: transparent !important;
+  border: none !important;
+  &::after {
+    content: none !important;
+  }
+  &:focus {
+    box-shadow: none !important;
+  }
+}
+
+.fas {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.chat-title {
+  font-size: large;
+}
+
+.chat-time {
+  margin-left: 15px;
+  font-size: small;
 }
 
 .image {
@@ -63,6 +173,8 @@ $hoverColor: rgb(46, 46, 46);
   }
   .chat {
     margin-left: 0.2rem;
+    padding-bottom: 1rem;
+    padding-top: 0.6rem;
   }
   :hover {
     background: $hoverColor;
@@ -79,6 +191,7 @@ $hoverColor: rgb(46, 46, 46);
   width: 100%;
   height: 40vh;
 }
+
 .chat-info {
   height: 10vh !important;
   :last-child {
@@ -88,7 +201,7 @@ $hoverColor: rgb(46, 46, 46);
     align-items: center;
   }
 
-  background: #363535;
+  background: #272626;
 }
 .send-message-form {
   height: 10vh;
@@ -111,24 +224,32 @@ $hoverColor: rgb(46, 46, 46);
 body,
 html {
   height: 100vh;
-  width: 98vw;
+  width: 99.15vw;
+  overflow: hidden;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   background-color: var(--bg-color) !important;
   color: white !important;
+  font-family: "Poppins", sans-serif !important;
 }
 .chats::-webkit-scrollbar,
+body::-webkit-scrollbar,
+.login-wrapper::-webkit-scrollbar,
 .messages::-webkit-scrollbar {
   width: 0.25rem;
 }
 
 .chats::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track,
+.login-wrapper::-webkit-scrollbar-track,
 .messages::-webkit-scrollbar-track {
   background: transparent;
 }
 
 .chats::-webkit-scrollbar-thumb,
+.body::-webkit-scrollbar-thumb,
+.login-wrapper::-webkit-scrollbar-thumb,
 .messages::-webkit-scrollbar-thumb {
   background: darkgray;
 }
@@ -141,4 +262,33 @@ html {
 input {
   background: transparent !important;
   color: $tc !important;
+  border-radius: 9px !important;
+  border: white ridge 2px !important;
+}
+
+.titles {
+  h1 {
+    font-family: "Sigmar One", cursive;
+  }
+}
+
+@media (max-width: 991px) {
+  .logo {
+    height: 150px;
+    width: 150px;
+  }
+  .titles {
+    h1 {
+      font-size: 1.8rem;
+    }
+    div {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .svg-wrapper {
+    display: none;
+  }
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Container,
   Row,
@@ -53,11 +53,41 @@ const Login = () => {
     }
   };
 
+  useEffect(() => {
+    document.body.style.overflowY = "scroll";
+    return () => {
+      document.body.style.overflowY = "hidden";
+    };
+  }, []);
+
   return (
-    <Container className="vh-100">
-      <Row className="justify-content-center align-items-center h-100">
-        <Col sm={12} md={6}>
-          <Form onSubmit={signin ? handleSignin : handleSignup}>
+    <Container style={{ minHeight: "100vh" }} className="login-wrapper">
+      <Row>
+        <Col
+          sm={0}
+          md={8}
+          className="svg-wrapper"
+          style={{ position: "relative", minHeight: "100vh" }}
+        >
+          <img className="mobile" src="/mobile.svg" alt="mobile" />
+          <img
+            className="chatting"
+            src="/chatting.svg"
+            alt="walking while chatting"
+          />
+        </Col>
+        <Col sm={12} md={4}>
+          <div className="d-flex align-items-center">
+            <img className="logo" src="/kite.png" alt="kite" />
+            <div className="titles">
+              <h1>Kite</h1>
+              <div>A chat app</div>
+            </div>
+          </div>
+          <Form
+            className={signin ? "login-form" : "signup-form"}
+            onSubmit={signin ? handleSignin : handleSignup}
+          >
             {!signin && (
               <FormGroup>
                 <FormLabel>First Name</FormLabel>
@@ -110,10 +140,13 @@ const Login = () => {
               </FormGroup>
             )}
             <FormGroup>
-              <Button type="submit">{signin ? "Sign in" : "Sign up"}</Button>
+              <Button variant="outline-light" type="submit">
+                {signin ? "Sign in" : "Sign up"}
+              </Button>
             </FormGroup>
             <FormGroup>
               <p
+                className="login-signup"
                 onClick={() => {
                   clearState();
                   setSignin(!signin);
