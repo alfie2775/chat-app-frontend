@@ -21,6 +21,12 @@ const Message: FC<{ msg: PersonalMessage | GroupMessage }> = ({ msg }) => {
         [`borderBottom${userMessage ? "Right" : "Left"}Radius`]: "1px",
       }}
     >
+      {"user" in msg && (
+        <p style={{ fontWeight: "bold", color: "white", marginBottom: "5px" }}>
+          {msg.user.username}
+        </p>
+      )}
+
       <Linkify
         componentDecorator={(decoratedHref, decoratedText, key) => (
           <a

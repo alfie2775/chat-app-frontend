@@ -15,7 +15,7 @@ const About = () => {
           <Creator url="https://alfie.vercel.app" name="Tarun" /> and{" "}
           <Creator url="https://pavanteja.netlify.app" name="Pavan Teja" />
         </p>
-        <p>Stay Home, Stay Safe &#10084;</p>
+        <p>Stay Home, Stay Safe ❤️</p>
       </div>
     </div>
   );

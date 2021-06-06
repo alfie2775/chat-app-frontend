@@ -86,10 +86,15 @@ const Chats: React.FC<{ chats: ChatsType; isEmpty: boolean }> = ({
     };
   }, [socket, addMessage, addFriendRequest]);
 
-  if (isEmpty) return <>You have no friends. Add your friends and have fun</>;
+  if (isEmpty)
+    return (
+      <div style={{ textAlign: "center" }}>
+        You have no friends. Add your friends and have fun
+      </div>
+    );
 
   if (chats.length < 1) {
-    return <div>No chats found</div>;
+    return <div style={{ textAlign: "center" }}>No chats found</div>;
   }
 
   return (

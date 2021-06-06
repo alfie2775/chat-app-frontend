@@ -1,11 +1,12 @@
 import axios from "axios";
 import { getHeaders } from "./index";
-export const api = false
-  ? "http://localhost:5000"
-  : "https://kite-backend.herokuapp.com";
+export const api =
+  process.env.PRODUCTION === "true"
+    ? "http://localhost:5000"
+    : "https://kite-backend.herokuapp.com";
 
 export const isAuth = (): boolean => {
-  return sessionStorage.getItem("kite-chat-token") != null;
+  return localStorage.getItem("kite-chat-token") != null;
 };
 
 export const signIn = async (body: { username: string; password: string }) => {
@@ -17,7 +18,7 @@ export const signIn = async (body: { username: string; password: string }) => {
     .catch((err) => {
       return { err };
     });
-  sessionStorage.setItem("kite-chat-token", res.token);
+  localStorage.setItem("kite-chat-token", res.token);
   if (res.err) return { err: res.err };
   return { user: res.user };
 };
@@ -35,13 +36,13 @@ export const signUp = async (body: {
     .catch((err) => {
       return { err };
     });
-  sessionStorage.setItem("kite-chat-token", res.token);
+  localStorage.setItem("kite-chat-token", res.token);
   if (res.err) return { err: res.err };
   return { user: res.user };
 };
 
 export const logout = () => {
-  sessionStorage.removeItem("kite-chat-token");
+  localStorage.removeItem("kite-chat-token");
 };
 
 export const getAllChats = async () => {

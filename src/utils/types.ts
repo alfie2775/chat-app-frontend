@@ -2,6 +2,7 @@ export interface User {
   firstname: string;
   lastname: string;
   username: string;
+  isOnline: boolean;
   img: string;
   group: string[];
   _id: string;

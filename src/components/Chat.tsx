@@ -52,7 +52,11 @@ const Chat: React.FC<{ chat: PersonalChat | GroupChat; idx: number }> = ({
         <div className="d-flex flex-column">
           <p className="chat-title">
             {"to" in chat
-              ? chat.to.firstname + " " + chat.to.lastname
+              ? chat.to.firstname +
+                " " +
+                chat.to.lastname +
+                " " +
+                chat.to.isOnline
               : chat.name}
           </p>
           <div>

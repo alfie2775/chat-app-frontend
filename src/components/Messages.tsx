@@ -51,7 +51,7 @@ const Messages = () => {
           if (prevDate !== currDate) {
             prevDate = currDate;
             return (
-              <div style={{ paddingLeft: 0 }} key={msg._id}>
+              <div key={msg._id}>
                 <div className="date-message">
                   <span>{currDate}</span>
                 </div>
