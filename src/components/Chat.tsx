@@ -56,7 +56,7 @@ const Chat: React.FC<{ chat: PersonalChat | GroupChat; idx: number }> = ({
                 " " +
                 chat.to.lastname +
                 " " +
-                chat.to.isOnline
+                (chat.to.isOnline ? "🟢" : "")
               : chat.name}
           </p>
           <div>
